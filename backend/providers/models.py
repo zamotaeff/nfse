@@ -7,7 +7,10 @@ class Product(models.Model):
     model = models.CharField(verbose_name='Модель',
                              max_length=255)
     date_launch = models.DateTimeField(verbose_name='Дата релиза',
-                                       auto_created=True)
+                                       auto_now=False,
+                                       auto_now_add=False,
+                                       blank=True,
+                                       null=True)
 
     def __str__(self):
         return self.title
@@ -31,7 +34,8 @@ class Provider(models.Model):
                                     choices=TYPES)
 
     title = models.CharField(verbose_name='Название',
-                             max_length=255)
+                             max_length=255,
+                             unique=True)
     email = models.EmailField(verbose_name='Email',
                               unique=True)
     country = models.CharField(verbose_name='Страна',
@@ -40,16 +44,19 @@ class Provider(models.Model):
                             max_length=255)
     street = models.CharField(verbose_name='Улица',
                               max_length=255)
-    house_number = models.CharField(verbose_name='Город',
+    house_number = models.CharField(verbose_name='Номер дома',
                                     max_length=255)
     debts = models.DecimalField(verbose_name='Задолженность',
                                 decimal_places=2,
-                                max_digits=20)
-    date_created = models.DateTimeField(auto_created=True,
-                                        verbose_name='Дата создания')
+                                max_digits=20,
+                                default=0)
+    date_created = models.DateField(auto_now_add=True,
+                                    verbose_name='Дата создания')
     products = models.ManyToManyField(Product,
                                       verbose_name='Продукты',
-                                      related_name='providers')
+                                      related_name='providers',
+                                      null=True,
+                                      blank=True)
     provider = models.ForeignKey('self',
                                  on_delete=models.SET_NULL,
                                  verbose_name='Поставщик',
