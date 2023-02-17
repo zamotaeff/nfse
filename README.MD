@@ -34,7 +34,7 @@
 - python3 manage.py runserver
 - python3 manage.py createsuperuser
 
-или
+## Docker:
 - git clone https://github.com/zamotaeff/nfse
 - cd nfse
 - docker-compose up
