@@ -2,6 +2,7 @@
 
 Приложение реализовано на Django с использованием PostgreSQL. Реализовано API для создания поставщиков и пользователей.
 Панель администратора, где можно просмотреть поставщиков с их задолженностью. Настроен action для очистки задолеженности.
+В списке поставщиков каждый элемент имеет ссылку на ссылающийся узел сети поставок.
 
 ## Сущности:
 - Поставщик
@@ -9,6 +10,7 @@
 - Продукт
 
 ## Стек:
+- Python 3.10
 - Django 4.1.3
 - REST Framework 3.14.0
 - PosrgeSQL 13.0
@@ -23,5 +25,23 @@
 
 ## Запуск:
 - git clone https://github.com/zamotaeff/nfse
+- cd nfse
+- python3 -m venv venv
+- source venv/bin/activate
+- pip3 install -r requirements.txt
+- cd backend
+- python3 manage.py migrate
+- python3 manage.py runserver
+- python3 manage.py createsuperuser
+
+или
+- git clone https://github.com/zamotaeff/nfse
+- cd nfse
 - docker-compose up
 
+## Документация API:
+
+Доступна по следующим адресам.
+
+- http://127.0.0.1:8000/swagger/
+- http://127.0.0.1:8000/redoc/
