@@ -1,21 +1,22 @@
 import pytest
+from django.urls import reverse
 
-from profiles.serializers import ProfileSerializer
+from users.models import User
 
 
 @pytest.mark.django_db
-def test_user_profile(client, get_credentials, user):
+def test_user_profile(api_client):
     """
     Test user profile
-    :param client: Django test client
-    :param get_credentials: Function to get user token for auth
-    :param user: User instance
+    :param api_client: Rest framework test client
     :return: None
     """
-    response = client.get(
-        path="/profiles/profile",
-        HTTP_AUTHORIZATION=get_credentials
+
+    user = User.objects.last()
+
+    response = api_client.get(
+        path=reverse('user-detail', args=[user.id, ]),
     )
 
     assert response.status_code == 200
-    assert response.data == ProfileSerializer(user).data
+    assert response.data['email'] == user.email

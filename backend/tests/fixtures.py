@@ -1,21 +1,25 @@
 import base64
 import pytest
+from rest_framework.test import APIClient
+from rest_framework_simplejwt.tokens import RefreshToken
+
+from tests.factories import UserFactory, ProductFactory, ProviderFactory
 
 
 @pytest.fixture
 @pytest.mark.django_db
-def get_credentials(client, user) -> str:
+def api_client():
     """
-    Getting a token for user authentication
-    :param client: Django test client
-    :param user: User instance
-    :return: token string
+    Create one stated user and set headers for request
+    :return: APIClient instance
     """
-    password = user.password
+    user = UserFactory.create(username='john', email='js@js.com', password='js.sj')
 
-    user.set_password(password)
-    user.save()
+    # products = ProductFactory.create_batch(30)
+    # providers = ProviderFactory.create_batch(10)
 
-    token = base64.b64encode(f'{user.username}:{password}'.encode()).decode()
+    client = APIClient()
+    refresh = RefreshToken.for_user(user)
+    client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
 
-    return 'Basic ' + token
+    return client

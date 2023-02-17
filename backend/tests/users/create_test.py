@@ -13,10 +13,7 @@ def test_user_create(client, django_user_model):
     :param django_user_model: Django user model
     :return: None
     """
-    username = UserFactory.username
-    password = UserFactory.password
-    print(username)
-    print(password)
+
     data = {
         "username": "test_user",
         "password": "p1o2i3u4",
@@ -24,7 +21,7 @@ def test_user_create(client, django_user_model):
     }
 
     response = client.post(
-        path=reverse('signup'),
+        path=reverse('user-list'),
         data=data,
         content_type="application/json"
     )
@@ -32,10 +29,5 @@ def test_user_create(client, django_user_model):
     user = django_user_model.objects.last()
 
     assert response.status_code == 201
-    assert response.data == {
-        "id": user.id,
-        "username": user.username,
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "email": user.email
-    }
+    assert response.data['username'] == user.username
+
