@@ -1,9 +1,8 @@
-import base64
 import pytest
 from rest_framework.test import APIClient
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from tests.factories import UserFactory, ProductFactory, ProviderFactory
+from tests.factories import UserFactory
 
 
 @pytest.fixture

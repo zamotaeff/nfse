@@ -10,4 +10,4 @@ EXPOSE 8000
 COPY . .
 
 ENTRYPOINT ["bash", "entrypoint.sh"]
-CMD python ./backend/manage.py runserver 0.0.0.0:8000
+CMD python3 ./backend/manage.py runserver 0.0.0.0:8000

@@ -2,8 +2,6 @@ import pytest
 
 from django.urls import reverse
 
-from tests.factories import UserFactory
-
 
 @pytest.mark.django_db
 def test_user_create(client, django_user_model):
@@ -30,4 +28,3 @@ def test_user_create(client, django_user_model):
 
     assert response.status_code == 201
     assert response.data['username'] == user.username
-

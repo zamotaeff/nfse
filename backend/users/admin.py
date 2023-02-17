@@ -19,7 +19,6 @@ class UserAdmin(BaseUserAdmin):
     )
 
     def provider_link(self, obj):
-
         if obj.provider:
             link = reverse(
                 'admin:providers_provider_change',

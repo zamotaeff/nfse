@@ -1,9 +1,7 @@
-import factory
 import pytest
 from django.urls import reverse
 
-from tests.factories import UserFactory, ProviderFactory
-from users.serializers import UserCurrentSerializer
+from tests.factories import ProviderFactory
 
 
 @pytest.mark.django_db

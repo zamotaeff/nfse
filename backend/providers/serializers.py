@@ -4,7 +4,6 @@ from providers.models import Product, Provider
 
 
 class ProductSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Product
         fields = '__all__'

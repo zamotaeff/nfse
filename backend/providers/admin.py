@@ -16,7 +16,7 @@ class ProviderAdmin(admin.ModelAdmin):
     list_display = ('title', 'type', 'country', 'city', 'debts', 'provider_link', 'id')
     list_per_page = 20
     list_filter = ('city', 'type')
-    actions = ('clear_debts', )
+    actions = ('clear_debts',)
 
     def clear_debts(self, request, queryset):
         for obj in queryset:

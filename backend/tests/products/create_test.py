@@ -1,10 +1,5 @@
 import pytest
-
-from django.utils import timezone
 from rest_framework.reverse import reverse
-
-from providers.serializers import ProductSerializer
-from tests.factories import ProductFactory
 
 from providers.models import Product
 
